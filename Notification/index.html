@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Notification</title>
+    </head>
+    <body>
+        <label>Name:</label>
+        <input type="text" name="name" id="name">
+        <button type="button" onclick="return onsaveclick();">Save</button>
+        <script>
+            function onsaveclick(){
+                var name = document.getElementById("name").value;
+                function showNotification(){
+                    const notification = new Notification("Button Clicked",{
+                        body: "Button Pressed By " + name
+                    })
+                }
+
+                console.log(Notification.permission);
+                if(Notification.permission === "granted"){
+                   showNotification();
+                }
+                else if(Notification.permission !== "denied"){
+                    Notification.requestPermission().then(permission => {
+                        if(permission === "granted"){
+                            showNotification();
+                        }
+                    });
+                }
+            }
+        </script>
+    </body> 
+</html>
